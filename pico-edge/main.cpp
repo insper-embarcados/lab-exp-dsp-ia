@@ -15,7 +15,6 @@
 
 // específico
 #include "mpu6050.h"
-#include <Fusion.h>
 #include "edge-impulse-sdk/classifier/ei_run_classifier.h"
 
 

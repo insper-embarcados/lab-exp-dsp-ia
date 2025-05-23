@@ -23,8 +23,6 @@ add_definitions(-DEIDSP_QUANTIZE_FILTERBANK=0
                 -DARM_MATH_LOOPUNROLL
                 )
 
-add_subdirectory(Fusion)
-add_subdirectory(mpu-data-forwarding)
 
 
 add_executable(pico-edge 
@@ -39,14 +37,10 @@ target_link_libraries(pico-edge PRIVATE
     FreeRTOS-Kernel 
     FreeRTOS-Kernel-Heap4
     hardware_i2c
-    Fusion
     )
 
 
-target_include_directories(mpu-data-forwarding PRIVATE
-    ${PROJECT_FOLDER}/freertos
-    ${PROJECT_FOLDER}
-)
+
 
 
 target_include_directories(pico-edge PRIVATE
@@ -61,8 +55,7 @@ target_include_directories(pico-edge PRIVATE
 # enable usb output, disable uart output
 pico_enable_stdio_usb(pico-edge 0)
 pico_enable_stdio_uart(pico-edge 1)
-pico_enable_stdio_usb(mpu-data-forwarding 0)
-pico_enable_stdio_uart(mpu-data-forwarding 1)
+
 
 RECURSIVE_FIND_FILE(SOURCE_FILES "${PROJECT_FOLDER}/edge-impulse-sdk" "*.cpp")
 RECURSIVE_FIND_FILE(MODEL_FILES "${PROJECT_FOLDER}/tflite-model" "*.cpp")
@@ -76,7 +69,6 @@ list(APPEND SOURCE_FILES ${MODEL_FILES})
 
 # add all sources to the project
 target_sources(pico-edge PRIVATE ${SOURCE_FILES})
-target_sources(mpu-data-forwarding PRIVATE ${SOURCE_FILES})
 
 
 target_compile_options(pico-edge PRIVATE -Wall)
