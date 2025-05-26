@@ -4,15 +4,11 @@ set(PROJECT_FOLDER .)
 
 include(pico_sdk_import.cmake)
 
-
 # Pull in FreeRTOS
 set(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_LIST_DIR}/freertos/FreeRTOS-Kernel)
 include(freertos/FreeRTOS_Kernel_import.cmake)
 
-
-
-
-project(lab-ia C CXX ASM)
+project(pico-edge C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
 
